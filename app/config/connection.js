@@ -1,10 +1,10 @@
 const mysql = require('mysql')
 
 const db = mysql.createConnection({
-    host: 'localhost',
+    host: 'git.ulm.ac.id',
     user: 'root',
-    password: '',
-    database: 'rony_db'
+    password: '100MysqlGit',
+    port: '3310',
 })
 
 module.exports  = db;
