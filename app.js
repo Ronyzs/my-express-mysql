@@ -1,6 +1,4 @@
 const { app } = require('./app/config/util');
-const Login = require('./app/routes/login/login');
-const getBahan = require('./app/routes/bahan/getAllBahan');
 
 // REST API 
 
@@ -9,11 +7,12 @@ const getBahan = require('./app/routes/bahan/getAllBahan');
  */
 
 // Authentication
-Login(app)
+app.use('/login', require('./app/routes/login'))
+// Auth Middleware
+app.use('/', require('./app/middleware/authenticator'))
 
 // Master Bahan
-getBahan(app)
-
+app.use('/bahan', require('./app/routes/bahan'))
 
 // Endpoint not found handling
 // app.use((req, res) => {
