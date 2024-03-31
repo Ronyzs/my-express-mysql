@@ -8,21 +8,22 @@ const { app } = require('./app/config/util');
 
 // Authentication
 app.use('/login', require('./app/routes/login'))
+
 // Auth Middleware
-app.use('/', require('./app/middleware/authenticator'))
+app.use(require('./app/middleware/authenticator'))
 
 // Master Bahan
 app.use('/bahan', require('./app/routes/bahan'))
 
 // Endpoint not found handling
-// app.use((req, res) => {
-//     response({
-//         statusCode: 404,
-//         data: null,
-//         message: 'API endpoint not found',
-//         res: res
-//     })
-// });
+app.use((req, res) => {
+    response({
+        statusCode: 404,
+        data: null,
+        message: 'API endpoint not found',
+        res: res
+    })
+});
 
 // Start the server
 app.listen(3000, () => {

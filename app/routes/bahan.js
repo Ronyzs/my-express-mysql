@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { response, db, validator, validation, handleKnexError } = require('../config/util');
+const { response, db, validation, handleKnexError } = require('../config/util');
 const Bahan = require('../models/bahan');
 
 router.get('/', async (req, res) => {

@@ -26,7 +26,7 @@ router.post('/', async (req, res) => {
             }
 
             // Compare passwords
-            const isPasswordValid = await user.password === hashPassword(password);;
+            const isPasswordValid = await user.password === hashPassword(password);
 
             if (isPasswordValid) {
                 // Payload
