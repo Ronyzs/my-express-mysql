@@ -1,11 +1,10 @@
-### Template ExpressJs
+### ExpressJs Template
 
-Template ini dibuat menggunakan ExpressJs untuk membuat REST API dengan authentication. 
-Database yang digunakan pada template ini bersifat sensitif.
+This template is created using ExpressJs to build a REST API with authentication. 
 <br>
 <br>
-Database yang sekarang digunakan sebagai contoh adalah database `silabv2` dan `siapps`. 
-Membangun REST API menggunakan beberapa library dari Node.Js untuk mengirimkan data melalui endpoint
+The current example databases are localy hosted. 
+Building a REST API using several libraries from Node.Js to send data through endpoints.
 <br>
 <br>
-Database yang digunakan pada template ini adalah SQL (MySQL)
+The database used in this template is SQL (MySQL).
