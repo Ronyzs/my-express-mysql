@@ -3,10 +3,13 @@ const router = express.Router();
 
 const { response, db, validation, handleKnexError } = require('../config/util');
 const Bahan = require('../models/bahan');
+const { join } = require('../config/connection');
 
 router.get('/', async (req, res) => {
     try {
-        const bahan = await db('silabv2.silab_m_bahan').select('bhnId as id', 'bhnNama as nama', 'bhnSatuan as satuan',);
+        const bahan = await db('students')
+            .select('students.id', 'students.nama', 'teachers.nama as teacher')
+            .join('teachers', 'teachers.id', 'students.teacher_id')
 
         if (bahan.length > 0) {
             response({

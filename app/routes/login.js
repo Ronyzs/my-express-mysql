@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { SECRET_KEY, db, response, validation, crypto } = require('../config/util');
+const { SECRET_KEY, db, response, validation, crypto, handleKnexError } = require('../config/util');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
@@ -14,7 +14,7 @@ router.post('/', async (req, res) => {
 
         try {
             // Retrieve user from the database
-            const user = await db('siapps.simari_user').where('username', username).first();
+            const user = await db('user').where('username', username).first();
 
             // Check if user exists
             if (!user) {
@@ -55,7 +55,7 @@ router.post('/', async (req, res) => {
         } catch (error) {
             return response({
                 statusCode: 500,
-                message: error,
+                message: handleKnexError(error.code),
                 res: res
             });
         }
@@ -64,8 +64,10 @@ router.post('/', async (req, res) => {
     }
 });
 
+const HASH_KEY = process.env.HASH_KEY;
+
 function hashPassword(password) {
-    const key = '4336c1ba641b8f6c98d647915e722f4a';
+    const key = HASH_KEY;
     const firstMd5 = crypto.createHash('md5').update(password).digest('hex');
     const concatenated = firstMd5 + key;
     const hashed = crypto.createHash('md5').update(concatenated).digest('hex');

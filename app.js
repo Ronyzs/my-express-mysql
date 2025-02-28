@@ -1,3 +1,6 @@
+require('dotenv').config();
+
+
 const { app } = require('./app/config/util');
 
 // REST API 
