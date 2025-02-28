@@ -13,7 +13,6 @@ app.use(bodyParser.json());
 // Middleware to parse form data
 app.use(upload.none());
 // Middleware to secrets key for authentication
-const SECRET_KEY = 'MyReallySecret300901';
 
 /**
  * Mengirimkan respons HTTP dengan status kode, data, dan pesan tertentu.
@@ -136,7 +135,6 @@ module.exports = {
     db,
     response,
     app,
-    SECRET_KEY,
     jsonParse,
     validator,
     validation,

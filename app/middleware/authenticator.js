@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
-const { SECRET_KEY, response } = require("../config/util");
+const { response } = require("../config/util");
+const API_KEY = process.env.API_KEY;
 
 // Authentication middleware
 function authenticator(req, res, next) {
@@ -9,7 +10,7 @@ function authenticator(req, res, next) {
         return res.status(401).json({ error: 'No API Key Found' });
 
     }
-    if (apiKey !== '4h312kjhASHJD') {
+    if (apiKey !== API_KEY) {
         return res.status(401).json({ error: 'Invalid API key' });
     }
 
@@ -29,7 +30,8 @@ function authenticator(req, res, next) {
         return res.status(401).json({ error: 'Token missing' });
     }
 
-
+    const SECRET_KEY = process.env.JWT_SECRET_KEY;
+    console.log(SECRET_KEY);
 
     jwt.verify(token, SECRET_KEY, (err, decoded) => {
         if (err) {

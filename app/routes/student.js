@@ -2,8 +2,6 @@ const express = require('express');
 const router = express.Router();
 
 const { response, db, validation, handleKnexError } = require('../config/util');
-const Bahan = require('../models/bahan');
-const { join } = require('../config/connection');
 
 router.get('/', async (req, res) => {
     try {
@@ -35,15 +33,18 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-    const { error, value } = Bahan.validate(req.body);
+    const studentSchema = require('../models/student');
+    const { error, value } = studentSchema.validate(req.body);
 
     if (!error) {
         try {
             const insertValue = {
-                bhnNama: value.nama,
-                bhnSatuan: value.satuan
+                nama: value.nama,
+                score: value.score,
+                teacher_id: value.teacher_id
             }
-            await db('silabv2.silab_m_bahan').insert(insertValue);
+
+            await db('students').insert(insertValue);
 
             response({
                 statusCode: 200,
@@ -63,15 +64,17 @@ router.post('/', async (req, res) => {
 });
 
 router.put('/:id', async (req, res) => {
-    const { error, value } = bahanSchema.validate(req.body);
+    const studentSchema = require('../models/student');
+    const { error, value } = studentSchema.validate(req.body);
 
     if (!error) {
         try {
             const insertValue = {
-                bhnNama: value.nama,
-                bhnSatuan: value.satuan
+                nama: value.nama,
+                score: value.score,
+                teacher_id: value.teacher_id
             }
-            await db('silabv2.silab_m_bahan').where({ bhnId: req.params.id }).update(insertValue);
+            await db('students').where({ id: req.params.id }).update(insertValue);
 
             response({
                 statusCode: 200,
@@ -91,21 +94,31 @@ router.put('/:id', async (req, res) => {
 });
 
 router.delete('/:id', async (req, res) => {
-
     try {
-        await db('silabv2.silab_m_bahan').where({ bhnId: req.params.id }).delete();
+        const student = await db('students').where({ id: req.params.id }).first();
+
+        if (!student) {
+            response({
+                statusCode: 404,
+                message: 'Data not found',
+                res: res
+            });
+            return;
+        }
+
+        await db('students').where({ id: req.params.id }).delete();
 
         response({
             statusCode: 200,
             message: 'Berhasil dihapus',
             res: res
-        })
+        });
     } catch (error) {
         response({
             statusCode: 500,
             message: handleKnexError(error.code),
             res: res
-        })
+        });
     }
 });
 

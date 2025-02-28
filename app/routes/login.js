@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-const { SECRET_KEY, db, response, validation, crypto, handleKnexError } = require('../config/util');
+const { db, response, validation, crypto, handleKnexError } = require('../config/util');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
-
+const SECRET_KEY = process.env.JWT_SECRET_KEY;
 // Route to generate JWT token
 router.post('/', async (req, res) => {
     const { error, value } = User.validate(req.body);

@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 
-const { app } = require('./app/config/util');
+const { app, response } = require('./app/config/util');
 
 // REST API 
 
@@ -15,8 +15,8 @@ app.use('/login', require('./app/routes/login'))
 // Auth Middleware
 app.use(require('./app/middleware/authenticator'))
 
-// Master Bahan
-app.use('/bahan', require('./app/routes/bahan'))
+// Master Student
+app.use('/student', require('./app/routes/student'))
 
 // Endpoint not found handling
 app.use((req, res) => {
