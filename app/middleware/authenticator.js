@@ -31,7 +31,6 @@ function authenticator(req, res, next) {
     }
 
     const SECRET_KEY = process.env.JWT_SECRET_KEY;
-    console.log(SECRET_KEY);
 
     jwt.verify(token, SECRET_KEY, (err, decoded) => {
         if (err) {
