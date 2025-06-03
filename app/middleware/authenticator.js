@@ -1,6 +1,9 @@
 const jwt = require('jsonwebtoken');
 const { response } = require("../config/util");
-const API_KEY = process.env.API_KEY;
+const config = require('../config/environment'); // Ambil konfigurasi yang sesuai
+
+const API_KEY = config.apiKey; // Ambil API key dari konfigurasi
+const SECRET_KEY = config.jwtSecret; // Ambil secret key dari konfigurasi
 
 // Authentication middleware
 function authenticator(req, res, next) {
@@ -29,8 +32,6 @@ function authenticator(req, res, next) {
     if (!token) {
         return res.status(401).json({ error: 'Token missing' });
     }
-
-    const SECRET_KEY = process.env.JWT_SECRET_KEY;
 
     jwt.verify(token, SECRET_KEY, (err, decoded) => {
         if (err) {

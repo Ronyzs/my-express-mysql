@@ -1,10 +1,13 @@
 const express = require('express');
 const router = express.Router();
+const config = require('../config/environment'); // Ambil konfigurasi yang sesuai
 
 const { db, response, validation, crypto, handleKnexError } = require('../config/util');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
-const SECRET_KEY = process.env.JWT_SECRET_KEY;
+
+const SECRET_KEY = config.jwtSecret; // Ambil secret key dari konfigurasi
+const HASH_KEY = config.hashKey;
 
 // Route to generate JWT token
 router.post('/', async (req, res) => {
@@ -54,6 +57,7 @@ router.post('/', async (req, res) => {
                 })
             }
         } catch (error) {
+            console.error('Error during login:', error);
             return response({
                 statusCode: 500,
                 message: handleKnexError(error.code),
@@ -64,8 +68,6 @@ router.post('/', async (req, res) => {
         return validation(error, res)
     }
 });
-
-const HASH_KEY = process.env.HASH_KEY;
 
 function hashPassword(password) {
     const key = HASH_KEY;

@@ -1,10 +1,13 @@
+const config = require('./environment'); // Ambil konfigurasi yang sesuai
+
 const db = require('knex')({
     client: 'mysql', // specify your database client here
     connection: {
-        host: process.env.DB_HOST,
-        user: process.env.DB_USER,
-        password: process.env.DB_PASSWORD,
-        database: process.env.DB_NAME // add your database name here
+        host: config.dbHost,
+        user: config.dbUser,
+        port: config.dbPort, // add your database port here
+        password: config.dbPassword,
+        database: config.dbName // add your database name here
     }
 });
 

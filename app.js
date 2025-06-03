@@ -1,5 +1,4 @@
-require('dotenv').config();
-
+const config = require('./app/config/environment'); // Ambil konfigurasi yang sesuai
 
 const { app, response } = require('./app/config/util');
 
@@ -29,6 +28,6 @@ app.use((req, res) => {
 });
 
 // Start the server
-app.listen(process.env.PORT, () => {
-    console.log(`Server is running on port ${process.env.PORT}`);
+app.listen(config.port, () => {
+    console.log(`Server is running on port ${config.port}`);
 });
