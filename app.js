@@ -40,4 +40,5 @@ app.use((req, res) => {
 app.listen(config.port, () => {
     console.log(`Server is running on port ${config.port}`);
     console.log('Express app started successfully!');
+    console.log(':)');
 });
