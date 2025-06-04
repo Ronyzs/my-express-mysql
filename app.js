@@ -2,6 +2,10 @@ const config = require('./app/config/environment'); // Ambil konfigurasi yang se
 
 const { app, response } = require('./app/config/util');
 
+// Import routes
+const loginRoutes = require('./app/routes/login');
+const studentRoutes = require('./app/routes/student');
+
 // Middleware
 const authenticator = require('./app/middleware/authenticator');
 
@@ -11,11 +15,17 @@ const authenticator = require('./app/middleware/authenticator');
  * Routes
  */
 
-// Authentication
-app.use('/login', require('./app/routes/login'))
 
-// Master Student
-app.use('/student', authenticator, require('./app/routes/student'))
+// Logging middleware — letakkan di atas sebelum route lain
+app.use((req, res, next) => {
+    const now = new Date().toISOString();
+    console.log(`[${now}] ${req.method} ${req.originalUrl}`);
+    next();
+});
+
+console.log('Loading routes...');
+app.use('/login', loginRoutes);
+app.use('/student', authenticator, studentRoutes);
 
 // Endpoint not found handling
 app.use((req, res) => {
