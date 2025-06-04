@@ -3,8 +3,6 @@ const router = express.Router();
 
 const { response, db, validation, handleKnexError } = require('../config/util');
 
-console.log('Loading student route...');
-
 router.get('/', async (req, res) => {
     try {
         const bahan = await db('students')

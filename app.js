@@ -23,7 +23,6 @@ app.use((req, res, next) => {
     next();
 });
 
-console.log('Loading routes...');
 app.use('/login', loginRoutes);
 app.use('/student', authenticator, studentRoutes);
 

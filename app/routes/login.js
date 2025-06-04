@@ -9,8 +9,6 @@ const User = require('../models/user');
 const SECRET_KEY = config.jwtSecret; // Ambil secret key dari konfigurasi
 const HASH_KEY = config.hashKey;
 
-console.log('Loading login route...');
-
 // Route to generate JWT token
 router.post('/', async (req, res) => {
     const { error, value } = User.validate(req.body);
