@@ -4,26 +4,28 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - NODE_ENV=production
-      - DB_HOST=${DB_HOST}
+      - NODE_ENV=development
+      - DB_HOST=database
       - DB_PORT=${DB_PORT}
       - DB_USER=${DB_USER}
       - DB_PASSWORD=${DB_PASSWORD}
       - DB_NAME=${DB_NAME}
       - HASH_KEY=${HASH_KEY}
-      - JWT_SECRET=${JWT_SECRET}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
       - API_KEY=${API_KEY}
       - PORT=${PORT}
+    depends_on:
+      - database
 
   database:
-    image: mysql:8.0 # Atau mariadb:latest
+    image: mysql:8.0
     ports:
-      - "3306:3306" # Hanya untuk akses dari host, tidak wajib untuk komunikasi antar kontainer
+      - "3306:3306"
     environment:
-      MYSQL_ROOT_PASSWORD:  # Sesuaikan untuk development
-      MYSQL_ALLOW_EMPTY_PASSWORD: "yes" # Hanya untuk development, jangan digunakan di production
+      MYSQL_ROOT_PASSWORD: 1q2w3e4r
+      MYSQL_ALLOW_EMPTY_PASSWORD: "no"
     volumes:
-      - db_data:/var/lib/mysql # Untuk menyimpan data database
+      - mysql_data:/var/lib/mysql
 
 volumes:
-  db_data:
+  mysql_data:
