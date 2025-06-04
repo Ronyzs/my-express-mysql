@@ -2,6 +2,9 @@ const config = require('./app/config/environment'); // Ambil konfigurasi yang se
 
 const { app, response } = require('./app/config/util');
 
+// Middleware
+const authenticator = require('./app/middleware/authenticator');
+
 // REST API 
 
 /**
@@ -11,11 +14,8 @@ const { app, response } = require('./app/config/util');
 // Authentication
 app.use('/login', require('./app/routes/login'))
 
-// Auth Middleware
-app.use(require('./app/middleware/authenticator'))
-
 // Master Student
-app.use('/student', require('./app/routes/student'))
+app.use('/student', authenticator, require('./app/routes/student'))
 
 // Endpoint not found handling
 app.use((req, res) => {
