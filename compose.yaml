@@ -15,7 +15,7 @@ services:
       - API_KEY=${API_KEY}
       - PORT=${PORT}
     volumes:
-      - /home/ronyzs/api/my-express-mysql:/usr/src/app
+      - /home/ronyzs/api/my-express-mysql:/usr/src/app/api
     depends_on:
       - database
 
