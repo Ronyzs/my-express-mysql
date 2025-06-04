@@ -2,7 +2,7 @@ services:
   app:
     build: .
     ports:
-      - "8080:8080"
+      - "5002:5002"
     environment:
       - NODE_ENV=development
       - DB_HOST=database

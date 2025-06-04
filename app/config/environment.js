@@ -6,9 +6,9 @@ dotenv.config();
 const config = {
     development: {
         port: 8080,
-        dbHost: process.env.DB_HOST, // Default ke localhost jika tidak diatur
+        dbHost: 'localhost', // Default ke localhost jika tidak diatur
         dbUser: 'root',
-        dbPassword: '1q2w3e4r',
+        dbPassword: '',
         dbName: 'notes_app',
         dbPort: 3306, // Default MySQL port
         hashKey: '4336c1ba641b8f6c98d647915e722f4a',
