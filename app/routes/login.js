@@ -8,6 +8,7 @@ const User = require('../models/user');
 
 const SECRET_KEY = config.jwtSecret; // Ambil secret key dari konfigurasi
 const HASH_KEY = config.hashKey;
+const API_KEY = config.apiKey;
 
 // Route to generate JWT token
 router.post('/', async (req, res) => {
@@ -45,7 +46,7 @@ router.post('/', async (req, res) => {
                     statusCode: 200,
                     data: {
                         token: token,
-                        apiKey: '4h312kjhASHJD'
+                        apiKey: API_KEY,
                     },
                     res: res
                 })
