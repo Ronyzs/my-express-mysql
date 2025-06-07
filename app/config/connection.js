@@ -1,7 +1,7 @@
 const config = require('./environment'); // Ambil konfigurasi yang sesuai
 
 const db = require('knex')({
-    client: 'mysql', // specify your database client here
+    client: 'mysql2', // specify your database client here
     connection: {
         host: config.dbHost,
         user: config.dbUser,

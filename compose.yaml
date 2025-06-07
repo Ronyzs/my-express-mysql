@@ -15,9 +15,10 @@ services:
       - API_KEY=${API_KEY}
       - PORT=${PORT}
     volumes:
-      - /home/ronyzs/api/my-express-mysql:/usr/src/app/api
+      - /home/ronyzs/api/my-express-mysql:/usr/src/app/
     depends_on:
       - database
+    restart: unless-stopped
 
   database:
     image: mysql:8.0
@@ -25,9 +26,12 @@ services:
       - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-      MYSQL_ALLOW_EMPTY_PASSWORD: "no"
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
     volumes:
       - mysql_data:/var/lib/mysql
+    restart: unless-stopped
 
 volumes:
   mysql_data:
