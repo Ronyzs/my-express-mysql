@@ -18,7 +18,10 @@ const authenticator = require('./app/middleware/authenticator');
 
 // Logging middleware — letakkan di atas sebelum route lain
 app.use((req, res, next) => {
-    const now = new Date().toISOString();
+    const now = new Date().toLocaleString('en-US', { 
+        timeZone: 'Asia/Makassar',
+        hour12: false // gunakan 24 jam
+    });
     console.log(`[${now}] ${req.method} ${req.originalUrl}`);
     next();
 });
