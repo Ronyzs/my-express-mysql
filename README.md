@@ -32,7 +32,7 @@ A RESTful API boilerplate built with **Express.js** and **MySQL**. This project 
 ```bash
 git clone https://github.com/Ronyzs/my-express-mysql.git
 cd my-express-mysql
-cp .your.env .env
+cp .env.example .env
 ```
 **Edit .env file to configure DB credentials and app port.**
 
