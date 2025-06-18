@@ -3,17 +3,8 @@ services:
     build: .
     ports:
       - "5002:5002"
-    environment:
-      - NODE_ENV=development
-      - DB_HOST=database
-      - DB_PORT=${DB_PORT}
-      - DB_USER=${DB_USER}
-      - DB_PASSWORD=${DB_PASSWORD}
-      - DB_NAME=${DB_NAME}
-      - HASH_KEY=${HASH_KEY}
-      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
-      - API_KEY=${API_KEY}
-      - PORT=${PORT}
+    env_file:
+      - .env
     volumes:
       - /home/ronyzs/api/my-express-mysql:/usr/src/app/
     depends_on:
@@ -24,6 +15,8 @@ services:
     image: mysql:8.0
     ports:
       - "3306:3306"
+    env_file:
+      - .env
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
       MYSQL_DATABASE: ${DB_NAME}
